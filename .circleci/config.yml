@@ -54,6 +54,7 @@ jobs:
           # and store it as GITHUB_TOKEN environment variable in circle ci
           # https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
           command: |
+            echo Creating and releasing ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_TAG}
             mv ./artifacts/build.zip ./artifacts/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG}.zip
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ${CIRCLE_TAG} ./artifacts/
 
