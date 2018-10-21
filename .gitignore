@@ -3,3 +3,6 @@
 #exclude build files to prevent committing dev version on error
 /index.js
 /index.css
+
+#exclude build artifacts 
+/artifacts
