@@ -73,12 +73,12 @@ jobs:
       - run:
           name: Update dist repo
           command: |
-            git clone -q https://${GITHUB_TOKEN}github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git dist
+            git clone -q https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git dist
             cd dist
             unzip -o ../artifacts/build.zip
             git add .
             git commit -m "update to ${CIRCLE_TAG}"
-            git push -q https://${GITHUB_TOKEN}github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git master
+            git push -q https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git master
 
 workflows:
   version: 2
