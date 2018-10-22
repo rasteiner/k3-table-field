@@ -59,7 +59,26 @@ jobs:
             mv ./artifacts/build.zip ./artifacts/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG}.zip
             ghr -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} artifacts/
 
+  publish-composer-release:
 
+    docker:
+      - image: cibuilds/github:0.10 #doesn't really matter
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ./artifacts
+
+      - run:
+          name: Update dist repo
+          command: |
+            git clone -q https://${GITHUB_TOKEN}github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git dist
+            cd dist
+            unzip -o ../artifacts/build.zip
+            git add .
+            git commit -m "update to ${CIRCLE_TAG}"
+            git push -q https://${GITHUB_TOKEN}github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git master
 
 workflows:
   version: 2
@@ -72,6 +91,14 @@ workflows:
             tags:
               only: /^\d+\.\d+\.\d+$/
       - publish-github-release:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+      - publish-composer-release:
           requires:
             - build
           filters:
