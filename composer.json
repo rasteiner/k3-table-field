@@ -1,0 +1,16 @@
+{
+  "name": "rasteiner/k3-table-field",
+  "description": "K3 plugin. A very simple table editor. No expanding views, no modals. Just edit a table of strings. ",
+  "authors": [
+    {
+      "name": "Roman Steiner",
+      "email": "roman@toastlab.ch"
+    }
+  ],
+  "license": "ISC",
+  "autoload": {
+    "files": [
+      "index.php"
+    ]
+  }
+}
