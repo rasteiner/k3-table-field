@@ -74,10 +74,10 @@ jobs:
           name: Update dist repo
           #You need to set environment variables GITHUB_EMAIL and GITHUB_NAME
           command: |
-            git config user.email "${GITHUB_EMAIL}"
-            git config user.name "${GITHUB_NAME}"
             git clone -q https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}-dist/${CIRCLE_PROJECT_REPONAME}.git dist
             cd dist
+            git config user.email "${GITHUB_EMAIL}"
+            git config user.name "${GITHUB_NAME}"
             unzip -o ../artifacts/build.zip
             git add .
             git commit -m "update to ${CIRCLE_TAG}"
