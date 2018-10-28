@@ -1,5 +1,5 @@
 # k3-table-field
-K3 plugin. A very simple table editor. No expanding views, no modals. Just edit a table of strings. 
+K3 plugin. A very simple table editor. No expanding views, no modals. Just edit a table of strings (or checkboxes or selects). 
 
 ## Install
 ### Download Zip file
@@ -18,7 +18,16 @@ You need to build them yourself with either `npm run dev` or `npm run build`.
 
 ## Use
 1. Use the field type `table`
-2. Set the columns as a `key:label` object. 
+2. Define the property `columns` as a `key:definition` object. 
+
+`definition` depends on what type of form element you want.  
+
+- For simple textfields it's simply the label for the column. 
+- For checkboxes it's an object with the properties `label` and `type` (which should be `checkbox`)
+- For selects it's an object with the properties:
+  - `label`
+  - `type`: which should be `select`)
+  - `options`: which should be an object with `value:label` properties
 
 ### Example
 
@@ -31,4 +40,13 @@ fields:
       name: First Name
       surname: Last Name
       age: Age
+      alive:
+        label: Alive
+        type: checkbox
+      gender:
+        label: Gender
+        type: select
+        options:
+          f: Female
+          m: Male
 ```
